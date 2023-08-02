@@ -49,7 +49,7 @@ module.exports = {
     },
     deleteAThought(req,res) {
         Thought.findOneAndRemove(
-            {_id: req.params.thoughtsId}
+            {_id: req.params.thoughtId}
         )
         .then((thoughtData) =>
         !thoughtData ? res.status(404) .json({message: "No thought with stated ID"}) : res.json({message: "Delete successful"})
@@ -64,7 +64,7 @@ module.exports = {
     },
     createReaction({params, body}, res){
         Thought.findOneAndUpdate(
-            {_id:params.thoughtsId},
+            {_id:params.thoughtId},
             {$addToSet:{reactions:body}},
             {runValidators:true, new:true}
         ) .then((thoughtData) => 
